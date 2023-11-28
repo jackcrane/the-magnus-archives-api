@@ -3,6 +3,9 @@ FROM node:16
 RUN --mount=type=secret,id=DATABASE_URL \
   cat /run/secrets/DATABASE_URL
 
+# Set the DATABASE_URL environment variable
+ENV DATABASE_URL=$DATABASE_URL
+
 # Set the working directory
 WORKDIR /app
 

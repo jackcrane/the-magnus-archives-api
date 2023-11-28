@@ -14,13 +14,12 @@ RUN yarn
 
 # Copy all files
 COPY . .
-RUN cd ./fe && yarn && cd ..
 
 # Log env variables
 RUN printenv
 
-# Build the Prisma database and frontend
-RUN yarn build_db && yarn build_fe
+# Build the Prisma database
+RUN yarn build_db
 
 # Expose the application port
 EXPOSE 4000

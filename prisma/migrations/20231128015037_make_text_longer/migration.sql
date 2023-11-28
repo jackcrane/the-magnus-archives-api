@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `Flag` MODIFY `text` VARCHAR(255) NOT NULL;

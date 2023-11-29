@@ -1,7 +1,7 @@
 # Base image
 FROM node:16
-RUN --mount=type=secret,id=DATABASE_URL \
-  cat /run/secrets/DATABASE_URL
+# RUN --mount=type=secret,id=DATABASE_URL \
+#   cat /run/secrets/DATABASE_URL
 
 ARG DATABASE_URL
 ENV DATABASE_URL=$DATABASE_URL

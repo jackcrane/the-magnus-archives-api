@@ -31,5 +31,5 @@ jobs:
           context: .
           push: true
           tags: jackcranee/the-magnus-archives-graphql:${{ steps.package-version.outputs.current-version}}
-          secrets: |
-            "DATABASE_URL=TEST"
+          build-args: |
+            DATABASE_URL=https://your-database-url.com

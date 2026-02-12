@@ -1,5 +1,5 @@
 # Base image
-FROM node:16
+FROM node:16-bullseye
 
 # Set the working directory
 WORKDIR /app

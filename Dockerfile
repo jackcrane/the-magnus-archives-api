@@ -1,10 +1,5 @@
 # Base image
 FROM node:16
-# RUN --mount=type=secret,id=DATABASE_URL \
-#   cat /run/secrets/DATABASE_URL
-
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
 
 # Set the working directory
 WORKDIR /app
@@ -15,17 +10,20 @@ COPY package.json ./
 # Install dependencies
 RUN yarn
 
+# Install Postgres
+RUN apt-get update \
+  && apt-get install -y postgresql \
+  && rm -rf /var/lib/apt/lists/*
+
 # Copy all files
 COPY . .
 
-# Log env variables
-RUN printenv
-
-# Build the Prisma database
-RUN yarn build_db
+# Add entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Expose the application port
 EXPOSE 4000
 
 # Start the application
-CMD ["yarn", "start"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
